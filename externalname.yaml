@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: takaaki-nginx
+spec:
+  type: ExternalName
+  externalName: dev.takaaki-nginx.de

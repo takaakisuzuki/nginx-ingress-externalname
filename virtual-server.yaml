@@ -1,0 +1,22 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: test-external
+spec:
+  host: aks.takaaki-nginx.de
+  upstreams:
+  - name: external 
+    service: takaaki-nginx
+    port: 8081
+    healthCheck:
+      enable: true
+      path: /
+      interval: 1s
+      fails: 1
+      passes: 1
+      mandatory: true
+      persistent: true
+  routes:
+  - path: /
+    action:
+      pass: external
